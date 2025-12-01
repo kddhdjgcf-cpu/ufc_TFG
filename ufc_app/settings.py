@@ -50,7 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'middleware.security.MyCustomMiddleware'
+    'django.middleware.security.SecurityMiddleware'
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
