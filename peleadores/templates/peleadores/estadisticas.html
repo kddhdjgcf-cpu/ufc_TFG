@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Estadísticas UFC</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #222;
+            margin-bottom: 30px;
+        }
+
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .stat-box {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 8px rgba(0,0,0,0.1);
+            width: 220px;
+        }
+
+        canvas {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 8px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+        }
+
+        .top-list {
+            width: 60%;
+            margin: auto;
+            margin-top: 20px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 8px rgba(0,0,0,0.1);
+        }
+
+        .top-list h2 {
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #333;
+            color: white;
+        }
+
+        .back {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        a {
+            text-align: center;
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #333;
+            background-color: #ffc600;
+            padding: 10px 16px;
+            border-radius: 6px;
+            transition: 0.3s;
+            font-weight: bold;
+        }
+
+        a:hover {
+            background-color: #dbac02;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Estadísticas y Rankings UFC</h1>
+
+    <div class="stats-container">
+        <div class="stat-box">
+            <h3>Total Peleadores</h3>
+            <p>{{ total_peleadores }}</p>
+        </div>
+        <div class="stat-box">
+            <h3>Promedio Victorias</h3>
+            <p>{{ promedio_victorias }}</p>
+        </div>
+        <div class="stat-box">
+            <h3>Promedio Derrotas</h3>
+            <p>{{ promedio_derrotas }}</p>
+        </div>
+        <div class="stat-box">
+            <h3>Promedio Edad</h3>
+            <p>{{ promedio_edad }}</p>
+        </div>
+    </div>
+
+    <div class="top-list">
+        <h2>🏆 Top 10 Peleadores con más Victorias</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Victorias</th>
+                    <th>Derrotas</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in top_victorias %}
+                <tr>
+                    <td>{{ p.nombre }}</td>
+                    <td>{{ p.victorias }}</td>
+                    <td>{{ p.derrotas }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="top-list">
+        <h2>🏆 Top 10 Peleadores con más Golpes por minuto</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Golpes por minuto</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in top_golpes_minuto %}
+                <tr>
+                    <td>{{ p.nombre }}</td>
+                    <td>{{ p.golpes_por_minuto }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="back">
+        <a href="{% url 'inicio' %}">Volver al menú</a>
+    </div>
+
+   
+</body>
+</html>

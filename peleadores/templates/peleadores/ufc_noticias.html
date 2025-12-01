@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noticias UFC</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #222;
+            margin-bottom: 30px;
+        }
+
+        .news-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .news-card {
+            background: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 8px rgba(0,0,0,0.1);
+            width: 300px;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .news-card:hover {
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        }
+
+        .news-card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .news-card h3 {
+            font-size: 18px;
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        .news-card p {
+            font-size: 14px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        a {
+            display: inline-block;
+            text-decoration: none;
+            text-align: left;
+            color: #333;
+            background-color: #ffc600;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            padding: 10px 16px;
+            border-radius: 6px;
+            transition: 0.3s;
+            font-weight: bold;
+        }
+
+        a:hover {
+            background-color: #dbac02;
+        }
+
+        .news-card a {
+            text-decoration: none;
+            color: white;
+            background-color: #ffc600;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: 0.3s;
+        }
+
+        .news-card a:hover {
+            background-color: #dbac02;
+        }
+
+        
+    </style>
+</head>
+<body>
+    <h1>Últimas Noticias UFC</h1>
+
+    <div class="back">
+        <a href="{% url 'inicio' %}">Volver al menú</a>
+    </div>
+
+    <div class="news-container">
+        {% for articulo in articulos %}
+            <div class="news-card">
+                {% if articulo.urlToImage %}
+                    <img src="{{ articulo.urlToImage }}" alt="{{ articulo.title }}">
+                {% endif %}
+                <h3>{{ articulo.title }}</h3>
+                <p>{{ articulo.description|default:"Sin descripción disponible" }}</p>
+                <a href="{{ articulo.url }}" target="_blank">Leer más</a>
+            </div>
+        {% empty %}
+            <p>No hay noticias disponibles.</p>
+        {% endfor %}
+    </div>
+
+</body>
+</html>

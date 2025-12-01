@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenido a UFC Insights: Exploración de estadísticas y perfiles de peleadores
+</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #1c1c1c, #333);
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: #ffc600;
+        }
+
+        p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+
+        a {
+            text-decoration: none;
+            background-color: #ffc600;
+            color: #000000;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        a:hover {
+            background-color: #dbac02;
+        }
+
+        div{
+            display: flex;
+            flex-direction: column; /* hace que los hijos vayan de arriba hacia abajo */
+            gap: 10px; /* opcional, espacio entre ellos */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>¡Bienvenido a UFC Insights!</h1>
+        <p>Explora los perfiles y estadísticas de tus peleadores favoritos.</p>
+        <a href="{% url 'lista_peleadores' %}">Ver lista de peleadores</a>
+        <a href="{% url 'comparar_peleadores' %}">Comparar peleadores</a>
+        <a href="{% url 'ufc_noticias' %}">Ultimas noticias de la UFC</a>
+        <a href="{% url 'estadisticas' %}">Estadisticas de la UFC</a>
+    </div>
+</body>
+</html>

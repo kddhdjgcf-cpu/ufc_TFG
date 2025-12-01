@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: ufc-tfg
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn mi_proyecto.wsgi:application"
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: mi_proyecto.settings
+      - key: PYTHON_VERSION
+        value: 3.10
+    plan: free

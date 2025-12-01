@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ peleador.nombre }} - Detalle</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #222;
+        }
+
+        p {
+            line-height: 1.6;
+            margin: 8px 0;
+        }
+
+        strong {
+            color: #444;
+        }
+
+        .imagen {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .imagen img {
+            max-width: 300px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #333;
+            background-color: #ffc600;
+            padding: 10px 16px;
+            border-radius: 6px;
+            transition: 0.3s;
+            font-weight: bold;
+        }
+
+        a:hover {
+            background-color: #dbac02;
+        }
+
+        .back {
+            display: block;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ peleador.nombre }}</h1>
+
+        {% if peleador.foto %}
+            <div class="imagen">
+                <img src="{{ peleador.foto.url }}" alt="{{ peleador.nombre }}">
+            </div>
+        {% endif %}
+
+        {% if peleador.edad %}
+            <p><strong>Edad:</strong> {{ peleador.edad }} años</p>
+        {% endif %}
+
+        {% if peleador.peso %}
+            <p><strong>Peso:</strong> {{ peleador.peso }} kg</p>
+        {% endif %}
+
+        {% if peleador.altura %}
+            <p><strong>Altura:</strong> {{ peleador.altura }} cm</p>
+        {% endif %}
+
+        {% if peleador.alcance %}
+            <p><strong>Alcance:</strong> {{ peleador.alcance }} cm</p>
+        {% endif %}
+
+        {% if peleador.guardia %}
+            <p><strong>Guardia:</strong> {{ peleador.guardia }}</p>
+        {% endif %}
+
+        <h2>Récord</h2>
+        <p><strong>Victorias:</strong> {{ peleador.victorias }}</p>
+        <p><strong>Derrotas:</strong> {{ peleador.derrotas }}</p>
+
+        <h2>Estadísticas de combate</h2>
+        {% if peleador.golpes_por_minuto %}
+            <p><strong>Golpes por minuto:</strong> {{ peleador.golpes_por_minuto }}</p>
+        {% endif %}
+        {% if peleador.precision_golpes %}
+            <p><strong>Precisión de golpes (%):</strong> {{ peleador.precision_golpes }}</p>
+        {% endif %}
+        {% if peleador.golpes_recibidos %}
+            <p><strong>Golpes recibidos por minuto:</strong> {{ peleador.golpes_recibidos }}</p>
+        {% endif %}
+        {% if peleador.defensa_golpes %}
+            <p><strong>Defensa de golpes (%):</strong> {{ peleador.defensa_golpes }}</p>
+        {% endif %}
+        {% if peleador.derribos_promedio %}
+            <p><strong>Derribos promedio por 15 min:</strong> {{ peleador.derribos_promedio }}</p>
+        {% endif %}
+        {% if peleador.precision_derribos %}
+            <p><strong>Precisión de derribos (%):</strong> {{ peleador.precision_derribos }}</p>
+        {% endif %}
+        {% if peleador.defensa_derribos %}
+            <p><strong>Defensa de derribos (%):</strong> {{ peleador.defensa_derribos }}</p>
+        {% endif %}
+        {% if peleador.sumisiones_promedio %}
+            <p><strong>Sumisiones promedio por 15 min:</strong> {{ peleador.sumisiones_promedio }}</p>
+        {% endif %}
+
+        <div class="back">
+            <a href="{% url 'lista_peleadores' %}">← Volver a la lista</a>
+        </div>
+    </div>
+</body>
+</html>
