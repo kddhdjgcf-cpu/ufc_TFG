@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventos UFC</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #222;
+            margin-bottom: 20px;
+        }
+
+        .event-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .event-card {
+            background: #fff;
+            padding: 20px;
+            width: 320px;
+            border-radius: 12px;
+            box-shadow: 0 0 8px rgba(0,0,0,0.1);
+            transition: .3s;
+        }
+
+        .event-card:hover {
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        }
+
+        .event-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .event-card h3 {
+            margin: 10px 0;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .event-card p {
+            font-size: 14px;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .back {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .back a {
+            text-decoration: none;
+            background-color: #ffc600;
+            padding: 10px 16px;
+            border-radius: 6px;
+            color: white;
+        }
+
+        .back a:hover {
+            background-color: #dbac02;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Eventos UFC</h1>
+
+    <!-- Próximos Eventos -->
+    <h2>Próximos eventos</h2>
+    <div class="event-container">
+        {% for e in eventos_proximos %}
+            <div class="event-card">
+                {% if e.strEventThumb %}
+                    <img src="{{ e.strEventThumb }}">
+                {% endif %}
+                <h3>{{ e.strEvent }}</h3>
+                <p><strong>Fecha:</strong> {{ e.dateEvent }}</p>
+                <p><strong>Lugar:</strong> {{ e.strVenue }}</p>
+            </div>
+        {% empty %}
+            <p>No hay eventos próximos.</p>
+        {% endfor %}
+    </div>
+
+    <br><br>
+
+    <!-- Eventos pasados -->
+    <h2>Resultados recientes</h2>
+    <div class="event-container">
+        {% for e in eventos_pasados %}
+            <div class="event-card">
+                {% if e.strEventThumb %}
+                    <img src="{{ e.strEventThumb }}">
+                {% endif %}
+                <h3>{{ e.strEvent }}</h3>
+                <p><strong>Fecha:</strong> {{ e.dateEvent }}</p>
+                <p><strong>Lugar:</strong> {{ e.strVenue }}</p>
+            </div>
+        {% empty %}
+            <p>No hay resultados recientes.</p>
+        {% endfor %}
+    </div>
+
+    <div class="back">
+        <a href="{% url 'inicio' %}">Volver al menú</a>
+    </div>
+
+</body>
+</html>

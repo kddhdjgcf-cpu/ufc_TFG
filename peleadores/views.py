@@ -122,3 +122,28 @@ def estadisticas(request):
 
     return render(request, 'peleadores/estadisticas.html', context)
 
+
+def ufc_eventos(request):
+    # API para próximos eventos
+    url_next = "https://www.thesportsdb.com/api/v1/json/3/eventsnextleague.php?id=4680"
+
+    # API para eventos pasados
+    url_past = "https://www.thesportsdb.com/api/v1/json/3/eventspastleague.php?id=4680"
+
+    eventos_proximos = []
+    eventos_pasados = []
+
+    try:
+        r1 = requests.get(url_next)
+        eventos_proximos = r1.json().get("events", [])
+
+        r2 = requests.get(url_past)
+        eventos_pasados = r2.json().get("events", [])
+
+    except Exception as e:
+        print("Error cargando eventos:", e)
+
+    return render(request, "peleadores/ufc_eventos.html", {
+        "eventos_proximos": eventos_proximos,
+        "eventos_pasados": eventos_pasados
+    })
