@@ -125,10 +125,10 @@ def estadisticas(request):
 
 def ufc_eventos(request):
     # API para próximos eventos
-    url_next = "https://www.thesportsdb.com/api/v1/json/3/eventsnextleague.php?id=4680"
+    url_next = "https://www.thesportsdb.com/api/v1/json/3/eventsnextleague.php?id=4497"
 
     # API para eventos pasados
-    url_past = "https://www.thesportsdb.com/api/v1/json/3/eventspastleague.php?id=4680"
+    url_past = "https://www.thesportsdb.com/api/v1/json/3/eventspastleague.php?id=4497"
 
     eventos_proximos = []
     eventos_pasados = []
