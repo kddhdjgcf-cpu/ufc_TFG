@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bienvenido a UFC Insights: Exploración de estadísticas y perfiles de peleadores
-</title>
+    <title>Bienvenido a UFC Insights</title>
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -16,6 +16,42 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            position: relative;
+        }
+
+        .logout {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .logout a {
+            background-color: #ff4d4d;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .logout button {
+            background-color: #ff4d4d;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .logout button:hover {
+            background-color: #cc0000;
+        }
+
+        .logout a:hover {
+            background-color: #cc0000;
         }
 
         .container {
@@ -51,21 +87,36 @@
             background-color: #dbac02;
         }
 
-        div{
+        div {
             display: flex;
-            flex-direction: column; /* hace que los hijos vayan de arriba hacia abajo */
-            gap: 10px; /* opcional, espacio entre ellos */
+            flex-direction: column;
+            gap: 10px;
         }
     </style>
 </head>
+
 <body>
+
+    <div class="logout">
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit">Cerrar sesión</button>
+        </form>
+    </div>
+
     <div class="container">
         <h1>¡Bienvenido a UFC Insights!</h1>
         <p>Explora los perfiles y estadísticas de tus peleadores favoritos.</p>
+
         <a href="{% url 'lista_peleadores' %}">Ver lista de peleadores</a>
         <a href="{% url 'comparar_peleadores' %}">Comparar peleadores</a>
-        <a href="{% url 'ufc_noticias' %}">Ultimas noticias de la UFC</a>
-        <a href="{% url 'estadisticas' %}">Estadisticas de la UFC</a>
+        <a href="{% url 'ufc_noticias' %}">Últimas noticias de la UFC</a>
+        <a href="{% url 'estadisticas' %}">Estadísticas de la UFC</a>
+        {% if puede_editar %}
+            <a href="{% url 'form_peleador' %}">Formulario peleador</a>
+        {% endif %}
+
     </div>
+
 </body>
 </html>

@@ -1,46 +1,94 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Login</title>
+    <meta charset="UTF-8">
+    <title>Login UFC Insights</title>
+
     <style>
         body {
-            background:#f4f4f9;
-            font-family:Arial;
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            height:100vh;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #1c1c1c, #333);
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
+
+        .container {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            width: 320px;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            color: #ffc600;
+        }
+
+        p {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+        }
+
         form {
-            background:white;
-            padding:30px;
-            border-radius:10px;
-            width:300px;
-            box-shadow:0 0 10px rgba(0,0,0,.1);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
+
         input {
-            width:100%;
-            padding:10px;
-            margin-bottom:15px;
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+            font-size: 1em;
         }
+
         button {
-            width:100%;
-            padding:10px;
-            background:#333;
-            color:white;
-            border:none;
+            margin-top: 10px;
+            background-color: #ffc600;
+            color: #000;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #dbac02;
+        }
+
+        .error {
+            color: #ff6b6b;
+            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
 
-<form method="post">
-    {% csrf_token %}
-    <h2 style="text-align:center;">Iniciar sesión</h2>
-    {{ form.username }}
-    {{ form.password }}
-    <button type="submit">Entrar</button>
-</form>
+<div class="container">
+    <h1>UFC Insights</h1>
+    <p>Acceso al sistema</p>
+
+    {% if form.errors %}
+        <div class="error">Usuario o contraseña incorrectos</div>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.username }}
+        {{ form.password }}
+        <button type="submit">Entrar</button>
+    </form>
+</div>
 
 </body>
 </html>

@@ -131,6 +131,11 @@
 
         <div class="back">
             <a href="{% url 'lista_peleadores' %}">← Volver a la lista</a>
+
+            {% if puede_editar %}
+                <a href="{% url 'editar_peleador' peleador.id %}">✏️ Editar</a>
+                <a href="{% url 'eliminar_peleador' peleador.id %}">🗑️ Eliminar</a>
+            {% endif %}
         </div>
     </div>
 </body>

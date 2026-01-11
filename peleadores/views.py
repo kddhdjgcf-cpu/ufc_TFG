@@ -9,7 +9,6 @@ import requests
 from django.db.models import Avg
 from django.contrib.auth.decorators import login_required
 from .decorators import editor_required
-from .models import Peleador
 from .forms import PeleadorForm
 from django.contrib.auth.decorators import login_required
 
@@ -18,7 +17,8 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def index(request):
-    return render(request, 'principal/principal.html')
+    puede_editar = request.user.is_superuser or request.user.groups.filter(name="Editor").exists()
+    return render(request, "principal/principal.html", {"puede_editar": puede_editar})
 
 @login_required
 def lista_peleadores(request):
@@ -74,7 +74,14 @@ def lista_peleadores(request):
 @login_required
 def detalle_peleador(request, id):
     peleador = get_object_or_404(Peleador, id=id)
-    return render(request, 'peleadores/detalle.html', {'peleador': peleador})
+
+    # Variable booleana para el template
+    puede_editar = request.user.is_superuser or request.user.groups.filter(name__iexact="Editor").exists()
+
+    return render(request, 'peleadores/detalle.html', {
+        'peleador': peleador,
+        'puede_editar': puede_editar
+    })
 
 @login_required
 def comparar_peleadores(request):

@@ -10,9 +10,9 @@ urlpatterns = [
     path('noticias/', views.ufc_noticias, name='ufc_noticias'),
     path('estadisticas/', views.estadisticas, name='estadisticas'),
     path("eventos/", views.ufc_eventos, name="eventos"),
-    path("crear/", views.crear_peleador, name="crear_peleador"),
-    path("editar/<int:id>/", views.editar_peleador, name="editar_peleador"),
-    path("eliminar/<int:id>/", views.eliminar_peleador, name="eliminar_peleador"),
+    path('nuevo/', views.crear_peleador, name='form_peleador'),
+    path('editar/<int:id>/', views.editar_peleador, name='editar_peleador'),
+    path('eliminar/<int:id>/', views.eliminar_peleador, name='eliminar_peleador'),
     path("login/", auth_views.LoginView.as_view(template_name="login.html"), name="login"),
     path("logout/", auth_views.LogoutView.as_view(), name="logout"),
 
