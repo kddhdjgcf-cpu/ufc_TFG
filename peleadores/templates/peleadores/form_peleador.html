@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Formulario Peleador</title>
+    <style>
+        body { font-family: Arial; background:#f4f4f9; padding:20px; }
+        form {
+            background:#fff;
+            max-width:500px;
+            margin:auto;
+            padding:20px;
+            border-radius:10px;
+        }
+        input, select {
+            width:100%;
+            padding:8px;
+            margin-bottom:10px;
+        }
+        button {
+            background:#333;
+            color:white;
+            padding:10px;
+            border:none;
+            width:100%;
+        }
+    </style>
+</head>
+<body>
+
+<h2 style="text-align:center;">Peleador</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Guardar</button>
+</form>
+
+</body>
+</html>

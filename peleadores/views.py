@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render,redirect, get_object_or_404
 from django.http import HttpResponse
 from .models import Peleador
 import re
@@ -7,13 +7,20 @@ from django.utils.http import urlencode
 from django.conf import settings
 import requests
 from django.db.models import Avg
+from django.contrib.auth.decorators import login_required
+from .decorators import editor_required
+from .models import Peleador
+from .forms import PeleadorForm
+from django.contrib.auth.decorators import login_required
 
 
 
+
+@login_required
 def index(request):
     return render(request, 'principal/principal.html')
 
-
+@login_required
 def lista_peleadores(request):
     peleadores = Peleador.objects.all()  # trae todos los peleadores de la base de datos
 
@@ -64,12 +71,12 @@ def lista_peleadores(request):
 
     return render(request, 'peleadores/lista.html', context)
 
-
+@login_required
 def detalle_peleador(request, id):
     peleador = get_object_or_404(Peleador, id=id)
     return render(request, 'peleadores/detalle.html', {'peleador': peleador})
 
-
+@login_required
 def comparar_peleadores(request):
     # Peleadores seleccionados (por ids)
     peleadores_seleccionados = Peleador.objects.filter(id__in=request.GET.getlist('ids'))
@@ -83,6 +90,7 @@ def comparar_peleadores(request):
     }
     return render(request, 'peleadores/comparar_peleadores.html', context)
 
+@login_required
 def ufc_noticias(request):
     api_key = settings.NEWS_API_KEY
     url = f"https://newsapi.org/v2/everything?q=UFC&sortBy=publishedAt&apiKey={api_key}"
@@ -95,7 +103,7 @@ def ufc_noticias(request):
     
     return render(request, "peleadores/ufc_noticias.html", {"articulos": articulos})
 
-
+@login_required
 def estadisticas(request):
     peleadores = Peleador.objects.all()
 
@@ -122,7 +130,7 @@ def estadisticas(request):
 
     return render(request, 'peleadores/estadisticas.html', context)
 
-
+@login_required
 def ufc_eventos(request):
     # API para próximos eventos
     url_next = "https://www.thesportsdb.com/api/v1/json/3/eventsnextleague.php?id=4497"
@@ -147,3 +155,31 @@ def ufc_eventos(request):
         "eventos_proximos": eventos_proximos,
         "eventos_pasados": eventos_pasados
     })
+
+@login_required
+@editor_required
+def crear_peleador(request):
+    form = PeleadorForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect("lista_peleadores")
+    return render(request, "peleadores/form_peleador.html", {"form": form})
+
+
+@login_required
+@editor_required
+def editar_peleador(request, id):
+    peleador = get_object_or_404(Peleador, id=id)
+    form = PeleadorForm(request.POST or None, instance=peleador)
+    if form.is_valid():
+        form.save()
+        return redirect("detalle_peleador", id=peleador.id)
+    return render(request, "peleadores/form_peleador.html", {"form": form})
+
+
+@login_required
+@editor_required
+def eliminar_peleador(request, id):
+    peleador = get_object_or_404(Peleador, id=id)
+    peleador.delete()
+    return redirect("lista_peleadores")

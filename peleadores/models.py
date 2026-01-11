@@ -1,7 +1,6 @@
 from django.db import models
 
 class Peleador(models.Model):
-    foto = models.ImageField(upload_to='peleadores/', blank=True, null=True)
     nombre = models.CharField(max_length=100)
     victorias = models.IntegerField(default=0)
     derrotas = models.IntegerField(default=0)
